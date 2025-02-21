@@ -1,9 +1,10 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-from handlers import router  # Импортируем маршрутизатор из handlers.py
+from handlers import router  
+from config import settings
 
 # Укажите свой токен
-TOKEN = "8151650888:AAFSJqYDHUtrii-7WS8sBDgi0MGtmYosg9k"
+TOKEN = settings.BOT_TOKEN
 
 async def main():
     bot = Bot(token=TOKEN)
@@ -16,4 +17,8 @@ async def main():
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
+    # if settings.ENVIRONMENT == "local":
+    #     print(settings.BOT_TOKEN)
+    # else:
+    #     print("It's production")
     asyncio.run(main())
