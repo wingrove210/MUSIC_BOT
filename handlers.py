@@ -14,4 +14,8 @@ async def cmd_start(message: types.Message):
 
 Жми на старт – и мы создадим для вас песню"""
     photo = types.InputFile("svo_photo.jpg")
-    await message.answer_photo(photo=photo, caption=caption)
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
+        [types.InlineKeyboardButton(text="Тех.Поддержка", url="https://t.me/YourSupportAccount"),
+         types.InlineKeyboardButton(text="Start", callback_data="start")]
+    ])
+    await message.answer_photo(photo=photo, caption=caption, reply_markup=keyboard)
