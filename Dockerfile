@@ -1,9 +1,24 @@
-FROM python:3.9-slim
+FROM python:3.12
 
-WORKDIR /app
+ENV PYTHONUNBUFFERED=1
 
-COPY . .
+WORKDIR /app/
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Install uv
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#installing-uv
+COPY --from=ghcr.io/astral-sh/uv:0.4.15 /uv /bin/uv
 
-CMD ["python3", "bot.py"]
+# Place executables in the environment at the front of the path
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#using-the-environment
+ENV PATH="/app/.venv/bin:$PATH"
+
+COPY ./pyproject.toml ./uv.lock ./.env /app/
+COPY . /app
+
+
+# Sync the project
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
+RUN uv sync
+
+
+CMD ["uv", "run", "/app/bot.py"]
