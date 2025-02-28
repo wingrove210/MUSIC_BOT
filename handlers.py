@@ -13,7 +13,7 @@ async def cmd_start(message: types.Message):
 Вы можете подарить песню близкому на фронте или, находясь на передовой, передать его родным. Музыка навсегда увековечит историю и имя героя. 
 
 Жми на старт – и мы создадим для вас песню"""
-    photo = "https://storage.yandexcloud.net/patriot-music/svo_photo.jpg"
+    photo = "https://storage.yandexcloud.net/patriot-music/svo_photo2.jpg"
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
         [types.InlineKeyboardButton(text="Тех.Поддержка", url="https://t.me/PATRIOT_MNGR")]
     ])
